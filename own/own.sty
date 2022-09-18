@@ -1,87 +1,12 @@
-% 俺様用XeLaTeXスタイルだよ～🤗🤗
-
-% 条件分岐記述用
+% 条件分岐用
 \usepackage{ifthen}
-
 
 % フォント
 \usepackage{zxjatype}
-\usepackage[haranoaji]{zxjafont}
+\usepackage[ipa]{zxjafont}
 \usepackage{fontspec}
-% \setmonofont{Ricty Diminished}  % 表示されんmonospace文字あったときとかに
 \usepackage{color}
 
-
-% 数式
-\usepackage{amsmath,amssymb,amsthm}  % つよ数式環境
-\usepackage{siunitx}  % SI単位
-\usepackage{bm}  % 太字のベクトル表記
-\usepackage{braket}  % 集合表現，波括弧これでよくね．\Set{}, \set{}
-\usepackage{array}  % 数式環境で表
-\usepackage{cancel}  % 数に斜線入れるやつ
-\usepackage{diffcoeff}  % 微分カンタンに書けるってさ
-% サイズ自動調整括弧くん簡略化ありがとうございます
-\newcommand{\paren}[1]{\left(#1\right)}
-\newcommand{\Brace}[1]{\left\{#1\right\}}
-\newcommand{\sbra}[1]{\left\lbrack#1\right\rbrack}
-\newcommand{\abra}[1]{\left\langle#1\right\rangle}
-\newcommand{\abs}[1]{\left|#1\right|}
-\newcommand{\norm}[1]{\left\|#1\right\|}
-% サイズ指定括弧
-\makeatletter
-\newcommand{\vast}[1]{\bBigg@{#1}}
-\makeatother
-% extra math operators
-% transpose
-\newcommand{\transpose}[1]{{}^t\!{#1}}
-% 斜体にしないでのやつ
-\newcommand{\grad}{\mathop{\mathrm{grad}}\nolimits}
-% \nolimitsなしだと，display環境で下付き文字が真下につく
-% わざわざ\expコマンド使うのは指数部が複雑なときなのに括弧なしはねェだろうよ
-\renewcommand{\exp}[1]{\mathop{\mathrm{exp}}\nolimits\paren{#1}}
-% \times 10^{n}
-\newcommand{\sipre}[1]{\times10^{#1}}
-
-% 証明環境．\qedhereで□出力
-\makeatletter
-\renewenvironment{proof}[1][\proofname]{\par
-  \pushQED{\qed}%
-  \normalfont \topsep6\p@\@plus6\p@\relax
-  \trivlist
-  \item[\hskip\labelsep
-        \itshape
-    #1\@addpunct{}]\ignorespaces
-}{%
-  %\popQED\endtrivlist\@endpefalse  % 勝手にqed入らないように
-  \endtrivlist\@endpefalse
-}
-\renewcommand{\proofname}{\Ovalbox{\bf 証明}}
-\makeatother
-
-% ! 行間に文章入れたければ\text{文章}または\intertext{文章}
-% 各環境については https://tm23forest.com/contents/latex-amsmath-guide-with-svg-outputexample 参照
-% 以下2行を加えると，参照した数式にのみ数式番号が付与される．これ使えば*いらんね
-% \usepackage{mathtools}
-% \mathtoolsset{showonlyrefs=true}
-% 転置のTは\top
-% 指数関数の指数部が複雑なときはeではなく\expの方が見やすいだろう
-% 空集合は\emptyset，集合の引算は\setminus
-% 下付き文字ありのcup[cap]は\bigcap[\bigcup]を使おう．外積も同様にbig版を
-% \phantom{text}で`text`部分と同じサイズの見えないボックスをつくれる．この類いろいろある
-% \qquad, \quad, ~, \;, \>, \:, \ , (\!これはマイナス)でも左右の空白いれれる．左は大きい順
-% \displaystyle を使うとinlineの分数表記で字が小さくならずに済むけどそもそもinlineで\frac{}使うな
-% コンマ区切り内で省略記号を使うときは\cdots{}ではなく\ldots{}を使いましょう．(a,b,...,f)な感じ
-% 引用符は""ではなく``''で入力するのが正しい
-% 角括弧には<>ではなく\langle\rangle
-
-
-% 図
-\usepackage{graphicx}
-\usepackage{float}  % for positioning to H of Figures
-\usepackage{subcaption}
-\usepackage{tikz}
-\usepackage{circuitikz}
-\usepackage{kvmap}  % カルノー図
 % 画像挿入簡略化
 \newcommand{\inputpic}[2]{%
 \includegraphics[width={#2}\linewidth]{#1}}
@@ -90,190 +15,6 @@
 \begin{minipage}[b]{.5\linewidth}\centering #2\end{minipage}}
 \newcommand{\twofigure}[4][h]{%
 \begin{figure}[#1]\centering\twocolpage{#2}{#3}#4\end{figure}}
-
-
-% 表
-\usepackage{booktabs}  % top,mid,bottomrule
-\usepackage{multirow}  % セル縦結合
-\usepackage{arydshln}  % 破線
-\usepackage{diagbox}   % 左上のとこに斜線と文字入れるやつ
-\usepackage{dcolumn}   % 小数点揃え
-% 縦線は`:`，横線は`\hdashline, \cdashline`
-% 複数行にわたるテーブル用のlongtable環境てのもある
-% tabular環境内で\diagbox{row}{column}
-
-
-% 箇条書き
-\usepackage{enumerate}
-% カウンタ文字列を変えるときは
-% \begin{enumerate}[あああ(ここにカウンタ)]
-% カウンタ文字は`1,A,a,I,i`
-% 文字列中に角括弧などを入れる場合は，カウンタ文字以外のとこを`\textrm{...}してやるといい
-\usepackage{paralist}  % インラインリスト
-% e.g.) \begin{inparaenum}[(1)] \item ... \end{}.
-
-
-% 枠付き文章
-\usepackage{ascmac}  % 別行で囲む．線形の授業プリントでよく見たやつ
-% \begin{itembox}[lcr]{title}...\end{} タイトルの位置をl:左かc:中央かr:右で指定
-% \begin{boxnote}...\end{} リングノートスタイル．教育者が使いそうなやつ
-% \begin{shadebox}...\end{} 枠の影付き．webで使われてるとこ見たことある
-\usepackage{fancybox}  % インライン
-% \fbox{} 長方形
-% \doublebox{} 二重fbox
-% \ovalbox{} 角が丸くなったね．Ovalboxにすると枠線が太くなる
-% \shadowbox{} shadeboxインライン版
-
-
-% その他文章修飾用パッケージ
-\usepackage{url}
-\usepackage{wrapfig}  % 文章の回り込み
-\usepackage{pxrubrica}  % ルビ
-% \usepackage{fancyhdr}  % ヘッダーつける
-
-\usepackage[electronic]{ifsym} % 電気回路シンボル
-% \RaisingEdge, \FallingEdge, \ShortPulseHigh, \ShortPulseLow,
-% \PulseHigh, \PulseLow, \LongPulseHigh, \LongPulseLow
-
-\usepackage{bookmark}
-
-% 相互参照
-\usepackage{hyperref}
-\hypersetup{
-  setpagesize=false,
-  bookmarksnumbered=true,
-  bookmarksopen=true,
-  colorlinks=true,
-  linkcolor=blue,
-  citecolor=red,
-}
-
-\usepackage[noabbrev]{cleveref}
-% crefをrefと見せかける
-% hyperrefと併用できない感じか？
-\let\nref\ref
-\let\ref\cref
-
-% 参照フォーマット
-\crefname{equation}{式}{式}
-\crefname{figure}{図}{図}
-\crefname{subfigure}{図}{図}
-\crefname{table}{表}{表}
-\crefname{subtable}{表}{表}
-\crefname{appendix}{付録}{付録}
-\crefname{subappendix}{付録}{付録}
-\crefname{subsubappendix}{付録}{付録}
-\crefname{subsubsubappendix}{付録}{付録}
-\crefformat{lstlisting}{{ソースコード}#2#1#3}
-\crefrangeformat{lstlisting}{{ソースコード}#3#1#4{--}#5#2#6}
-\crefmultiformat{lstlisting}{{ソースコード}#2#1#3}{, {ソースコード}#2#1#3}{, #2#1#3}{, {ソースコード}#2#1#3}
-\crefformat{page}{#2#1#3{ページ}}
-\crefrangeformat{page}{#3#1#4{--}#5#2#6{ページ}}
-\crefmultiformat{page}{#2#1#3{ページ}}{, #2#1#3{ページ}}{, #2#1#3}{, #2#1#3{ページ}}
-\crefformat{section}{#2#1#3{章}}
-\crefrangeformat{section}{#3#1#4{--}#5#2#6{章}}
-\crefmultiformat{section}{#2#1#3{章}}{, #2#1#3{章}}{, #2#1#3}{, #2#1#3{章}}
-\crefformat{subsection}{#2#1#3{節}}
-\crefrangeformat{subsection}{#3#1#4{--}#5#2#6{節}}
-\crefmultiformat{subsection}{#2#1#3{節}}{, #2#1#3{節}}{, #2#1#3}{, #2#1#3{節}}
-\crefformat{subsubsection}{#2#1#3{節}}
-\crefrangeformat{subsubsection}{#3#1#4{--}#5#2#6{節}}
-\crefmultiformat{subsubsection}{#2#1#3{節}}{, #2#1#3{節}}{, #2#1#3}{, #2#1#3{節}}
-% \crefformat{part}{{第}#2#1#3{部}}
-% \crefformat{chapter}{{第}#2#1#3{章}}
-\def\crefrangeconjunction{--}
-\def\crefpairconjunction{, }
-\def\crefmiddleconjunction{, }
-\def\creflastconjunction{, }
-\def\crefpairgroupconjunction{, }
-\def\crefmiddlegroupconjunction{, }
-\def\creflastgroupconjunction{, }
-
-% TODO:
-% hyperefとcleverefの併用時に，図表番号参照後のスペースが入らない問題の応急措置．
-% 番号前にはちゃんと入ってるけど後に入ってないせいで後の文字とひっついてる．
-% 下記設定か，そもそもhyoeref使わなければちゃんとスペース入るけど
-% hyperef側の設定うまく書き換えれたらいいんだけどわからん．とりあえずこれで
-\crefformat{figure}{図 #2#1#3 }
-\crefformat{table}{表 #2#1#3 }
-
-
-% ソースコード
-\usepackage{listings}
-\lstdefinestyle{ex}{
-  frame={trbl},
-  frameround={tttt},
-  lineskip=-0.7ex,
-  numbers=none
-}
-\lstdefinestyle{default}{
-  basicstyle=\ttfamily,
-  commentstyle = {\color[cmyk]{1,0.4,1,0}},
-  classoffset = 0,  %関数名等の色の設定
-  keywordstyle = {\bfseries \color{magenta}},  %キーワード(int, ifなど)の書体
-  keywordstyle = [2]{\bfseries \color[rgb]{1,0.55,0}},
-  keywordstyle = [3]{\bfseries \color[rgb]{0.28,0.24,0.545}},
-  keywordstyle = [4]{\bfseries \color{cyan}},
-  keywordstyle = [5]{\bfseries \color[rgb]{0,0.5,0}},
-  stringstyle = {\ttfamily \color[rgb]{0,0,1}},  %""で囲まれたなどの"文字"の書体
-  breaklines=true,  %枠外に行った時の自動改行
-  escapechar=\`,
-  columns=[l]{fullflexible},
-  keepspaces=true,
-  showstringspaces=false,
-  xrightmargin=0em,
-  xleftmargin=1em,
-  stepnumber=1,
-  lineskip=-0.5ex,
-  frame={lRtB},
-  frameround={nnnn},
-  numberstyle={\scriptsize},
-  numbers=left
-}
-%% Julia definition (c) 2020 Daichi Furukawa
-%%
-\lstdefinelanguage{Julia}{%
-  morekeywords={abstract, ans, baremodule, begin, break, const, continue, do,%
-    elseif, else, end, export, finally, for, function, global, if, import,%
-    let, local, macro, module, mutable, primitive, quote, return, struct, try,%
-    type, using, var, where, while},%
-  % Types
-  morekeywords=[2]{Any, Array, Bool, BigInt, BigFloat, Char, DataType, Enum,%
-    Expr, Float16, Float32, Float64, Function, Inf, Inf16, Inf32, Int8, Int16,%
-    Int32, Int64, Int128, Matrix, Missing, Module, Nan, NaN16, NaN32, Nothing,%
-    Some, Symbol, Tuple, Type, UInt8, UInt16, UInt32, UInt64, UInt128, Union,%
-    UnionAll, Val, Vararg, Vector, VecOrMat, im},%
-  % Constants
-  morekeywords=[3]{ARGS, C_NULL, DEPOT_PATH, ENDIAN_BOM, ENV, LOAD_PATH,%
-    PROGRAM_FILE, Sys.ARCH, Sys.BINDIR, Sys.CPU_THREADS, Sys.KERNEL,%
-    Sys.MACHINE, Sys.WORD_SIZE, false, stderr, stdin, stdout, true, missing, nothing},%
-  % Macros
-  morekeywords=[4]{@NamedTuple, @allocated, @assert, @boundscheck, @deprecate,%
-    @elapsed, @enum, @eval, @generated, @gensym, @goto, @isdefined, @inbouds,%
-    @inline, @label, @noinline, @nospecialize, @polly, @propagate_inbounds,%
-    @pure, @specialize, @simd, @time, @timed, @timev, @static, @v_str, @view,%
-    @views},%
-  sensitive=true,%
-  morecomment=[l]\#,%
-  morestring=[b]',%
-  morestring=[b]",%
-  morecomment=[s]{"""}{"""},% used for documentation text
-                            % (mulitiline strings)
-  morestring=[s]{r"}{"},% regular expression literal
-  morestring=[s]{r"""}{"""},%
-  morestring=[s]{raw"}{"},% raw string literals
-  morestring=[s]{raw"""}{"""},%
-  morestring=[s]{L"}{"},% LaTeX strings
-  morestring=[s]{L"""}{"""}%
-}%
-\lstset{style=default}  % set default style
-\renewcommand{\lstlistingname}{ソースコード}
-% 文書全体のデフォルト言語変更したけりぇ\lstset{language=言語名}すっべ
-% プレーンテキスト出したけりゃ\lstset{language=}
-% \lstlistoflistings でListingsの目次作るよ
-% Importing code from file
-% \lstinputlisting[language=Haskell, caption=Haskell sample code]{sample.hs}
-
 
 % 表紙
 \makeatletter
@@ -291,44 +32,76 @@
 \global\let\@coauthor\@empty
 
 \newcommand{\maketitlepage}{%
-  \thispagestyle{empty}  % ベージ番号なし
-  \null\vfill
-  \begin{center}
-    {\Huge \sffamily \@title \par}
-    \ifthenelse{\equal{\@subtitle}{}}{}{%
-      \vspace{5mm}
-      {\LARGE \sffamily \@subtitle \par}
-    }
-    \vspace{20mm}
-    {\Large \@gakka \ \@grade 年 \@stuid 号 \par}
-    \vspace{3mm}
-    {\Large \@author \par}
-    \vspace{8mm}
-    \begin{table}[h]
-      \Large \centering
-      \begin{tabular}{rl}
-        \ifthenelse{\equal{\@expdate}{}}{}{%
-          実験日： & \@expdate\\
+    \thispagestyle{empty}  % ベージ番号なし
+    \null\vfill
+    \begin{center}
+        {\Huge \sffamily \@title \par}
+        \ifthenelse{\equal{\@subtitle}{}}{}{%
+            \vspace{5mm}
+            {\LARGE \sffamily \@subtitle \par}
         }
-        提出日： & \@date
-      \end{tabular}
-    \end{table}
-    \vspace{8mm}
-    \ifthenelse{\equal{\@coauthor}{}}{}{%
-      {\Large 共同実験者：\hspace{1mm}}
-      \begin{minipage}[t]{14em}
-          \begin{flushleft}
-            \Large \@coauthor
-          \end{flushleft}
-      \end{minipage}
-    }
-  \end{center}
-  \vfill
-  \clearpage
-  \setcounter{page}{1}  % ここからページ番号振り始め
-  \pagestyle{plain}
+        \vspace{20mm}
+        {\Large \@gakka \ \@grade 年 \@stuid 号 \par}
+        \vspace{3mm}
+        {\Large \@author \par}
+        \vspace{8mm}
+        \begin{table}[h]
+            \Large \centering
+            \begin{tabular}{rl}
+                \ifthenelse{\equal{\@expdate}{}}{}{%
+                実験日： & \@expdate \\
+                }
+                提出日： & \@date
+            \end{tabular}
+        \end{table}
+        \vspace{8mm}
+        \ifthenelse{\equal{\@coauthor}{}}{}{%
+            {\Large 共同実験者：\hspace{1mm}}
+            \begin{minipage}[t]{14em}
+                \begin{flushleft}
+                    \Large \@coauthor
+                \end{flushleft}
+            \end{minipage}
+        }
+    \end{center}
+    \vfill
+    \clearpage
+    \setcounter{page}{1}  % ここからページ番号振り始め
+    \pagestyle{plain}
 }
 \makeatother
 
-
-% TODO: titlesecでsection見た目変えれる
+% ソースコード
+\usepackage{listings}
+\lstdefinestyle{ex}{
+    frame={trbl},
+    frameround={tttt},
+    lineskip=-0.7ex,
+    numbers=none
+}
+\lstdefinestyle{default}{
+    basicstyle=\ttfamily,
+    commentstyle = {\color[cmyk]{1,0.4,1,0}},
+    classoffset = 0,  %関数名等の色の設定
+    keywordstyle = {\bfseries \color{magenta}},  %キーワード(int, ifなど)の書体
+    keywordstyle = [2]{\bfseries \color[rgb]{1,0.55,0}},
+    keywordstyle = [3]{\bfseries \color[rgb]{0.28,0.24,0.545}},
+    keywordstyle = [4]{\bfseries \color{cyan}},
+    keywordstyle = [5]{\bfseries \color[rgb]{0,0.5,0}},
+    stringstyle = {\ttfamily \color[rgb]{0,0,1}},  %""で囲まれたなどの"文字"の書体
+    breaklines=true,  %枠外に行った時の自動改行
+    escapechar=\`,
+    columns=[l]{fullflexible},
+    keepspaces=true,
+    showstringspaces=false,
+    xrightmargin=0em,
+    xleftmargin=1em,
+    stepnumber=1,
+    lineskip=-0.5ex,
+    frame={lrtb},
+    frameround={nnnn},
+    numberstyle={\scriptsize},
+    numbers=left
+}
+\lstset{style=default}  % set default style
+\renewcommand{\lstlistingname}{ソースコード}
