@@ -10,4 +10,4 @@ forked from [Loliver1224/own-tex-style](https://github.com/Loliver1224/own-tex-s
 
 ## 導入方法
 
-`%USERPROFILE%\texmf\tex\latex\own`に`own.sty`置いて，`mktexlsr`を実行．
+`C:\texlive\2022\texmf-dist\tex\latex\own`に`own.sty`を配置して，`mktexlsr`を実行．
