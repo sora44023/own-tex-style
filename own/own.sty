@@ -43,12 +43,14 @@
 \def\stuid#1{\def\@stuid{#1}}
 \def\expdate#1{\def\@expdate{#1}}
 \def\coauthor#1{\def\@coauthor{#1}}
+\def\gakusekibango#1{\def\@gakuseki{#1}}
 \global\let\@subtitle\@empty
 \global\let\@gakka\@empty
 \global\let\@grade\@empty
 \global\let\@stuid\@empty
 \global\let\@expdate\@empty
 \global\let\@coauthor\@empty
+\global\let\@gakuseki\@empty
 
 \newcommand{\maketitlepage}{%
     \thispagestyle{empty}  % ベージ番号なし
@@ -60,7 +62,7 @@
             {\LARGE \sffamily \@subtitle \par}
         }
         \vspace{20mm}
-        {\Large \@gakka \ \@grade 年 \@stuid 号 \par}
+        {\Large 学籍番号： \@gakuseki \par}
         \vspace{3mm}
         {\Large \@author \par}
         \vspace{8mm}
