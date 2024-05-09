@@ -13,4 +13,4 @@ forked from [Loliver1224/own-tex-style](https://github.com/Loliver1224/own-tex-s
 `C:\texlive\{YEAR}\texmf-dist\tex\latex\own`に`own.sty`を配置して，PowerShellで`mktexlsr`を実行．
 
 ### macOSの場合
-`/usr/local/texlive/{YEAR}/texmf-dist/tex/latex/own`に`own.sty`を配置して，ターミナルで`mktexlsr`を実行．
+`/usr/local/texlive/{YEAR}/texmf-dist/tex/latex/own`に`own.sty`を配置して，ターミナルで`sudo mktexlsr`を実行．
