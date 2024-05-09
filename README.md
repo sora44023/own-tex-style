@@ -4,7 +4,7 @@ forked from [Loliver1224/own-tex-style](https://github.com/Loliver1224/own-tex-s
 
 ## 環境
 
-- ディストリビューション: TeX Live 2022
+- ディストリビューション: TeX Live 2024
 - エンジン: XeLaTeX
 - 文書クラス: bxjsarticle
 
